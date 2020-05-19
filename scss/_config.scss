@@ -1,0 +1,97 @@
+// ................................................................
+//       1.     /   Pagrindinių  parametrų  aprašymas  /
+// ................................................................
+
+$primary-color: #3b3838;
+
+$secondary-color: rgb(212, 141, 35);
+
+$show-home-image: true;
+$home-image: url(../img/suvirinimas/virinimas1.jpg);
+
+$background-opacity: 0.9;
+
+// ................................................................
+//        2.     /   @mixin'ų - TRANSITION  ( Ease - Out )
+// ................................................................
+
+@mixin easeOut {
+  transition: all 0.5s ease-out;
+}
+
+// ................................................................
+//       3.     /   @MIXIN  /  Background   /
+// ................................................................
+
+@mixin background {
+  @if $show-home-image {
+    &#bg-img {
+      background: $home-image;
+      background-attachment: fixed;
+      background-size: cover;
+
+      &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background: rgba($primary-color, $background-opacity);
+      }
+    }
+  }
+}
+
+// ................................................................
+//  4.  Spalvos nustatymas, jei šviesus fonas: spalva -tamsi, ir t.t.
+// ................................................................
+
+@function set-text-color($color) {
+  @if (lightness($color) > 40) {
+    @return #000;
+  } @else {
+    @return #fff;
+  }
+}
+
+// ................................................................
+//      5.       /   Media Query Mixins  /    500 px   /
+// ................................................................
+
+@mixin mediaSm {
+  @media screen and (max-width: 500px) {
+    @content;
+  }
+}
+
+// ................................................................
+//      6.      /    Media Query Mixins   /   768 px   /
+// ................................................................
+
+@mixin mediaMd {
+  @media screen and (max-width: 768px) {
+    @content;
+  }
+}
+
+// ................................................................
+//    7.  /    Media Query Mixins  /  nuo  769 px  iki  1170 px   /
+// ................................................................
+
+@mixin mediaLg {
+  @media screen and (min-width: 769px) and (max-width: 1170px) {
+    @content;
+  }
+}
+
+// ................................................................
+//        8.    /    Media Query Mixins   /   1171 px    /
+// ................................................................
+
+@mixin mediaXl {
+  @media screen and (min-width: 1171px) {
+    @content;
+  }
+}
